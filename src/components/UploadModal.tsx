@@ -41,13 +41,13 @@ export default function UploadModal({ isOpen, onClose, albums }: UploadModalProp
       const filePath = `${fileName}`;
 
       const { error: uploadError } = await supabase.storage
-        .from('music-files')
+        .from('songs')
         .upload(filePath, file);
 
       if (uploadError) throw uploadError;
 
       const { data: { publicUrl } } = supabase.storage
-        .from('music-files')
+        .from('songs')
         .getPublicUrl(filePath);
 
       const { error: insertError } = await supabase
